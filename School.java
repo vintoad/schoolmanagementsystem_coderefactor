@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a school that manages teachers and students
- * and tracks financial information.
+ * Represents a school that manages teachers, students, and finances.
  */
 public class School {
 
     private List<Teacher> teachers;
     private List<Student> students;
-    private int totalMoneyEarned;
-    private int totalMoneySpent;
+    private Finance finance;
 
     /**
-     * Creates a new School object with lists of teachers and students.
+     * Creates a new School object with lists of teachers and students
+     * and initializes financial tracking.
      *
      * @param teachers list of teachers in the school.
      * @param students list of students in the school.
@@ -23,11 +22,10 @@ public class School {
     public School(List<Teacher> teachers, List<Student> students) {
         this.teachers = new ArrayList<>(teachers);
         this.students = new ArrayList<>(students);
-        this.totalMoneyEarned = 0;
-        this.totalMoneySpent = 0;
+        this.finance = new Finance();
     }
 
-    // Getters and Setters
+    // Getters
     public List<Teacher> getTeachers() {
         return teachers;
     }
@@ -36,43 +34,36 @@ public class School {
         return students;
     }
 
-    public int getTotalMoneyEarned() {
-        return totalMoneyEarned;
+    public Finance getFinance() {
+        return finance;
     }
 
-    public int getTotalMoneySpent() {
-        return totalMoneySpent;
-    }
-
-    // Business Logic
+    /**
+     * Adds a teacher to the school.
+     *
+     * @param teacher the teacher to be added.
+     */
     public void addTeacher(Teacher teacher) {
         if (teacher != null) {
             teachers.add(teacher);
         }
     }
 
+    /**
+     * Adds a student to the school.
+     *
+     * @param student the student to be added.
+     */
     public void addStudent(Student student) {
         if (student != null) {
             students.add(student);
         }
     }
 
-    public void updateTotalMoneyEarned(int moneyEarned) {
-        if (moneyEarned > 0) {
-            this.totalMoneyEarned += moneyEarned;
-        }
-    }
-
-    public void updateTotalMoneySpent(int moneySpent) {
-        if (moneySpent > 0) {
-            this.totalMoneySpent += moneySpent;
-            this.totalMoneyEarned -= moneySpent;
-        }
-    }
-
     @Override
     public String toString() {
-        return "School: \nTotal Money Earned: $" + totalMoneyEarned +
-               "\nTotal Money Spent: $" + totalMoneySpent;
+        return "School: \nTeachers: " + teachers.size() +
+               "\nStudents: " + students.size() +
+               "\n" + finance.toString();
     }
 }
