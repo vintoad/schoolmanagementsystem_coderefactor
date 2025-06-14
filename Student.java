@@ -1,72 +1,45 @@
-package schoolmanagementsystem;
+import java.util.*;
 
-/**
- * Represents a student in the school.
- */
 public class Student {
 
+    private String name;
+    // private int id;
     private final int id;
-    private final String name;
-    private int grade;
     private int feesPaid;
-    private final int feesTotal;
+    private int totalFees;
+    private Map<String, Integer> grades = new HashMap<>();
 
-    /**
-     * Creates a new student with a unique ID, name, and grade.
-     * The total fees for every student is $30,000.
-     *
-     * @param id    the unique ID of the student.
-     * @param name  the name of the student.
-     * @param grade the grade of the student.
-     */
-    public Student(int id, String name, int grade) {
-        this.id = id;
+    public Student(String name, int id, int totalFees) {
         this.name = name;
-        this.grade = grade;
+        this.id = id;
+        this.totalFees = totalFees;
         this.feesPaid = 0;
-        this.feesTotal = 30000;
     }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getGrade() {
-        return grade;
-    }
-
-    public void setGrade(int grade) {
-        if (grade > 0) {
-            this.grade = grade;
+    public void payFees(int amount) {
+        // this.feesPaid += amount; Kurangnya validasi
+        if (amount > 0) {
+            this.feesPaid += amount;
         }
+    }
+
+    public void setGrade(String subject, int grade) {
+        grades.put(subject, grade);
     }
 
     public int getFeesPaid() {
         return feesPaid;
     }
 
-    public int getFeesTotal() {
-        return feesTotal;
-    }
-
     public int getRemainingFees() {
-        return feesTotal - feesPaid;
+        return totalFees - feesPaid;
     }
 
-    // Business Logic
-    public void payFees(int fees) {
-        if (fees > 0 && (feesPaid + fees <= feesTotal)) {
-            feesPaid += fees;
-        }
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public String toString() {
-        return "Student{name='" + name + "', feesPaid=$" + feesPaid + "}";
+    public int getId() {
+        return id;
     }
 }

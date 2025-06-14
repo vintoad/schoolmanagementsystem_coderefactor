@@ -1,57 +1,33 @@
-package schoolmanagementsystem;
-
-/**
- * Represents a teacher in the school.
- */
 public class Teacher {
-
-    private final int id;
-    private final String name;
+    private String name;
+    private int id;
+    private String subject;
     private int salary;
-    private int salaryEarned;
 
-    /**
-     * Creates a new teacher with a unique ID, name, and salary.
-     *
-     * @param id     the unique ID of the teacher.
-     * @param name   the name of the teacher.
-     * @param salary the salary of the teacher.
-     */
-    public Teacher(int id, String name, int salary) {
-        this.id = id;
+    public Teacher(String name, int id, String subject, int salary) {
         this.name = name;
+        this.id = id;
+        this.subject = subject;
         this.salary = salary;
-        this.salaryEarned = 0;
     }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    public void assignGrade(Student student, int grade) {
+        student.setGrade(this.subject, grade);
     }
 
     public int getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
-        if (salary > 0) {
-            this.salary = salary;
-        }
+    public String getSubject() {
+        return subject;
     }
 
-    // Business Logic
-    public void receiveSalary(int salary) {
-        if (salary > 0) {
-            salaryEarned += salary;
-        }
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public String toString() {
-        return "Teacher{name='" + name + "', salaryEarned=$" + salaryEarned + "}";
+    public int getId() {
+        return id;
     }
 }
